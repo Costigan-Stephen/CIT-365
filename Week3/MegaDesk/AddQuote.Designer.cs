@@ -446,6 +446,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nameInput);
             this.Controls.Add(this.NavMainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AddQuote";
             this.Text = "AddQuote";
             ((System.ComponentModel.ISupportInitialize)(this.drawerInput)).EndInit();

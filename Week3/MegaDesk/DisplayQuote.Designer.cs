@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DisplayQuote));
             this.NavMainMenu = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NavMainMenu
             // 
             this.NavMainMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.NavMainMenu.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.NavMainMenu.Location = new System.Drawing.Point(556, 404);
             this.NavMainMenu.Name = "NavMainMenu";
             this.NavMainMenu.Size = new System.Drawing.Size(232, 34);
@@ -50,6 +52,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
             this.Controls.Add(this.NavMainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DisplayQuote";
             this.Text = "DisplayQuote";
             this.ResumeLayout(false);

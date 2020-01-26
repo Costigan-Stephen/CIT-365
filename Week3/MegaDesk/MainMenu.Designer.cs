@@ -95,6 +95,7 @@
             this.Controls.Add(this.navSearchQuotes);
             this.Controls.Add(this.NavViewQuotes);
             this.Controls.Add(this.NavAddQuote);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainMenu";
             this.Text = "Main Menu";
             this.ResumeLayout(false);
