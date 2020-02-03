@@ -59,7 +59,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.quoteTotal = new System.Windows.Forms.Label();
             this.submitQuote = new System.Windows.Forms.Button();
-            this.getQuote = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.drawerInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -380,12 +379,12 @@
             // submitQuote
             // 
             this.submitQuote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.submitQuote.BackColor = System.Drawing.Color.DarkGreen;
+            this.submitQuote.BackColor = System.Drawing.Color.Transparent;
             this.submitQuote.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.submitQuote.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.submitQuote.FlatAppearance.BorderSize = 0;
-            this.submitQuote.ForeColor = System.Drawing.Color.White;
-            this.submitQuote.Location = new System.Drawing.Point(403, 348);
+            this.submitQuote.ForeColor = System.Drawing.Color.Black;
+            this.submitQuote.Location = new System.Drawing.Point(284, 345);
             this.submitQuote.Margin = new System.Windows.Forms.Padding(0);
             this.submitQuote.Name = "submitQuote";
             this.submitQuote.Size = new System.Drawing.Size(232, 34);
@@ -393,19 +392,6 @@
             this.submitQuote.Text = "Submit";
             this.submitQuote.UseVisualStyleBackColor = false;
             this.submitQuote.Click += new System.EventHandler(this.SubmitQuote_Click);
-            // 
-            // getQuote
-            // 
-            this.getQuote.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.getQuote.BackColor = System.Drawing.Color.Transparent;
-            this.getQuote.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.getQuote.Location = new System.Drawing.Point(165, 348);
-            this.getQuote.Name = "getQuote";
-            this.getQuote.Size = new System.Drawing.Size(232, 34);
-            this.getQuote.TabIndex = 33;
-            this.getQuote.Text = "Get Quote";
-            this.getQuote.UseVisualStyleBackColor = false;
-            this.getQuote.Click += new System.EventHandler(this.getQuote_Click);
             // 
             // AddQuote
             // 
@@ -417,7 +403,6 @@
             this.CancelButton = this.NavMainMenu;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.getQuote);
             this.Controls.Add(this.submitQuote);
             this.Controls.Add(this.quoteTotal);
             this.Controls.Add(this.label13);
@@ -487,6 +472,5 @@
         private System.Windows.Forms.Label quoteTotal;
         private System.Windows.Forms.Button submitQuote;
         private System.Windows.Forms.BindingSource bindingSource1;
-        private System.Windows.Forms.Button getQuote;
     }
 }

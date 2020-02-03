@@ -43,6 +43,7 @@ namespace MegaDesk
             
             decimal amount = drawerInput.Value * 50;
             drawerCost.Text = amount.ToString("N1");
+            ChangeValues();
         }
 
         
@@ -59,6 +60,11 @@ namespace MegaDesk
                 int depth = GetDepth();
                 if (depth < (int)Desk.DeskSize.minDepth) depthInput.Text = (int)Desk.DeskSize.minDepth + "";
                 if (depth > (int)Desk.DeskSize.maxDepth) depthInput.Text = (int)Desk.DeskSize.maxDepth + "";
+                
+                if (widthInput.Text != "" || widthInput.Text != String.Empty)
+                {
+                    ChangeValues();
+                }
             }
         }
 
@@ -74,6 +80,12 @@ namespace MegaDesk
                 int width = Int32.Parse(widthInput.Text);
                 if (width < (int)Desk.DeskSize.minWidth) widthInput.Text = (int)Desk.DeskSize.minWidth + "";
                 if (width > (int)Desk.DeskSize.maxWidth) widthInput.Text = (int)Desk.DeskSize.maxWidth + "";
+                
+                if (depthInput.Text != "" || depthInput.Text != String.Empty)
+                {
+                    ChangeValues();
+                }
+                
             }
         }
 
@@ -93,7 +105,7 @@ namespace MegaDesk
             CalculateTotal();
         }
 
-        private void ChangeValues()
+        private bool ChangeValues()
         {
 
             try
@@ -104,7 +116,9 @@ namespace MegaDesk
             {
                 ShowDialog("Please fill out the request and try again!");
                 Console.WriteLine("{0} Exception caught.", ex);
+                return false;
             }
+            return true;
         }
 
         private void ShippingInput_Validating(object sender, CancelEventArgs e)
@@ -113,6 +127,10 @@ namespace MegaDesk
             {
                 shippingInput.Text = "";
                 shippingCost.Text = "$";
+            }
+            else
+            {
+                ChangeValues();
             }
         }
 
@@ -123,6 +141,10 @@ namespace MegaDesk
                 ShowDialog("Please enter a valid material");
                 materialInput.Text = "";
                 materialCost.Text = "$";
+            } 
+            else
+            {
+                ChangeValues();
             }
         }
 
@@ -141,27 +163,47 @@ namespace MegaDesk
 
         private void NameInput_Validating(object sender, CancelEventArgs e)
         {
-            //Content to go here in line with submission!
+            if (nameInput.Text == null || nameInput.Text =="")
+            {
+                nameInput.Text = "";
+                nameInput.Focus();
+            }
         }
 
         private void SubmitQuote_Click(object sender, EventArgs e)
         {
 
-            ShowDialog("Will be implemented next week!");
-            /*DeskQuote DeskQuote = new DeskQuote
+            
+
+            bool val = ChangeValues();
+
+            if (val)
             {
-                id = Guid.NewGuid(),
-                date = DateTime.Today,
-                depth = Int32.Parse(depthInput.Text),
-                width = Int32.Parse(widthInput.Text),
-                drawers = Int32.Parse(drawerInput.Text),
-                drawerCost = Int32.Parse(drawerInput.Text) * 50,
-                area = Int32.Parse(depthInput.Text) * Int32.Parse(widthInput.Text),
-                material = materialInput.Text,
-                customerName = nameInput.Text,
-                quote = Int32.Parse(quoteTotal.Text),
-                rush = shippingInput.Text
-            };*/
+                //ShowDialog("Will be implemented next week!");
+                DeskQuote DeskQuoteParse = new DeskQuote();
+
+                DeskQuoteParse.id = Guid.NewGuid();
+                DeskQuoteParse.date = DateTime.Today;
+                DeskQuoteParse.depth = Int32.Parse(depthInput.Text);
+                DeskQuoteParse.width = Int32.Parse(widthInput.Text);
+                DeskQuoteParse.drawers = Int32.Parse(drawerInput.Text);
+                DeskQuoteParse.drawerCost = Int32.Parse(drawerInput.Text) * 50;
+                DeskQuoteParse.area = Int32.Parse(depthInput.Text) * Int32.Parse(widthInput.Text);
+                DeskQuoteParse.areaCost = DeskQuote.AreaCost(Int32.Parse(depthInput.Text), Int32.Parse(widthInput.Text));                
+                DeskQuoteParse.material = materialInput.Text;
+                DeskQuoteParse.materialCost = Desk.DeskMaterialCost(materialInput.Text);
+                DeskQuoteParse.customerName = nameInput.Text;
+                DeskQuoteParse.rush = shippingInput.Text;
+                DeskQuoteParse.shippingCost = DeskQuote.ShippingCost(shippingInput.Text, DeskQuoteParse.area);
+                DeskQuoteParse.quote = (DeskQuoteParse.areaCost + DeskQuoteParse.drawerCost + DeskQuoteParse.shippingCost + DeskQuoteParse.materialCost);
+
+                var json = JsonConvert.SerializeObject(DeskQuoteParse);
+
+                if (json != null && json != "")
+                {
+                    SubmitQuote(json);
+                }
+            }
         }
 
         private void ShowDialog(string v)
@@ -177,6 +219,13 @@ namespace MegaDesk
         private void getQuote_Click(object sender, EventArgs e)
         {
             ChangeValues();
+        }
+
+        private void SubmitQuote(string json)
+        {
+            MainMenu viewMenu = (MainMenu)Tag;
+            viewMenu.navShowQuote_ref(json);
+            Close();
         }
     }
 }

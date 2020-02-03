@@ -41,6 +41,14 @@ namespace MegaDesk
             Hide();
         }
 
+        public void navShowQuote_ref(string json)
+        {
+            DisplayQuote viewquote = new DisplayQuote(json);
+            viewquote.Tag = this;
+            viewquote.Show(this);
+            Hide();
+        }
+
         private void navExit_Click(object sender, EventArgs e)
         {
             Application.Exit();

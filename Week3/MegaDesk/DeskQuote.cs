@@ -16,6 +16,9 @@ namespace MegaDesk
         public int drawers { get; set; }
         public int drawerCost { get; set; }
         public int area { get; set; }
+        public int areaCost { get; set; }
+        public int materialCost { get; set; }
+        public int shippingCost{ get; set; }
         public string material { get; set; }
         public string customerName { get; set; }
         public double quote { get; set; }
@@ -62,5 +65,6 @@ namespace MegaDesk
                     return 0;
             }
         }
+
     }
 }
