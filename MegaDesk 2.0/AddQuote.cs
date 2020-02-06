@@ -173,8 +173,6 @@ namespace MegaDesk
         private void SubmitQuote_Click(object sender, EventArgs e)
         {
 
-            
-
             bool val = ChangeValues();
 
             if (val)
@@ -201,7 +199,7 @@ namespace MegaDesk
 
                 if (json != null && json != "")
                 {
-                    DeskQuote.SaveToFile(json);
+                    DeskQuote.SaveToFile(DeskQuoteParse);
                     SubmitQuote(json);
                 }
             }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.AspNet.SignalR.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
@@ -31,6 +32,7 @@ namespace MegaDesk
 
 
         public string filepath = "quote.json";
+        private const string QUOTE_SEPARATOR = "#QUOTE#";
 
         public int AreaCalculate(int depth, int width)
         {
@@ -76,62 +78,47 @@ namespace MegaDesk
         public string OpenFile()
         {
             string json = System.IO.File.ReadAllText(filepath);
-            json = json.Replace("\\", "");
-            json = json.Replace("\"{", "{");
-            json = json.Replace("}\"", "}");
+
+            if (json.Contains("}{"))
+                json = json.Replace("}{", "},{");
+            if (!json.Contains("[") && json.Contains(","))
+            {
+                json = "[" + json + "]";
+            };
+            
             Console.WriteLine(json);
             return json;
 
         }
 
-        public void SaveToFile(string json)
+        public void SaveToFile(DeskQuote DeskQuoteParse)
         {
-            json = json.Replace("\\", "");
-            json = json.Replace("\"{", "{");
-            json = json.Replace("}\"", "}");
-            //open file stream
-            using (StreamWriter file = File.AppendText(filepath))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                //serialize object directly into file stream
-                serializer.Serialize(file, json);
-            }
+
+            JObject savefile = saveFileFormat(DeskQuoteParse);
+
+            File.AppendAllText(filepath, savefile.ToString());
+
         }
 
-        //EXPERIMENTAL
-        public List<string> CreateList()
+        public JObject saveFileFormat(DeskQuote DeskQuoteParse)
         {
-            string json = File.ReadAllText(filepath);
-            List<string> quoteList = JsonConvert.DeserializeObject<List<string>>(json);
-            Console.WriteLine(quoteList);
-            return quoteList;
-        }
+            JObject savefile = new JObject(
+                new JProperty("id",             DeskQuoteParse.id),
+                new JProperty("date",           DeskQuoteParse.date),
+                new JProperty("depth",          DeskQuoteParse.depth),
+                new JProperty("width",          DeskQuoteParse.width),
+                new JProperty("drawers",        DeskQuoteParse.drawers),
+                new JProperty("drawerCost",     DeskQuoteParse.drawerCost),
+                new JProperty("area",           DeskQuoteParse.area),
+                new JProperty("areaCost",       DeskQuoteParse.areaCost),
+                new JProperty("material",       DeskQuoteParse.material),
+                new JProperty("materialCost",   DeskQuoteParse.materialCost),
+                new JProperty("customerName",   DeskQuoteParse.customerName),
+                new JProperty("rush",           DeskQuoteParse.rush),
+                new JProperty("shippingCost",   DeskQuoteParse.shippingCost),
+                new JProperty("quote",          DeskQuoteParse.quote));
 
-        //EXPERIMENTAL
-        public object AddJSONValues(string jsonData, DeskQuote newQuote)
-        {
-            //ADD VALUES FROM EXISTING TO NEW
-            var quoteList = JsonConvert.DeserializeObject<List<object>>(jsonData);
-            quoteList.Add(new DeskQuote()
-            {
-            
-            id              = newQuote.id,
-            date            = newQuote.date,
-            depth           = newQuote.depth,
-            width           = newQuote.width,
-            drawers         = newQuote.drawers,
-            drawerCost      = newQuote.drawerCost,
-            area            = newQuote.area,
-            areaCost        = newQuote.areaCost,
-            material        = newQuote.material,
-            materialCost    = newQuote.materialCost,
-            customerName    = newQuote.customerName,
-            rush            = newQuote.rush,
-            shippingCost    = newQuote.shippingCost,
-            quote           = newQuote.quote
-            });
-
-            return quoteList;
+            return savefile;
         }
 
     }

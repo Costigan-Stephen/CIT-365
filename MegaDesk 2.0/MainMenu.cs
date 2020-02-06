@@ -57,7 +57,7 @@ namespace MegaDesk
         private void button1_Click(object sender, EventArgs e)
         {
             DeskQuote DeskQuote = new DeskQuote();
-            List<string> list = DeskQuote.CreateList();
+            DeskQuote.OpenFile();
         }
     }
 }

@@ -9,7 +9,6 @@ namespace MegaDesk
 {
     class Desk
     {
-        Desk desk = new Desk();
         DeskQuote quote = new DeskQuote();
 
         public enum Materials
@@ -46,21 +45,6 @@ namespace MegaDesk
                 default:
                     return 0;
             }
-        }
-
-        //EXPERIMENTAL
-        public string JSONappend()
-        {
-            // Read existing json data
-            var jsonData = System.IO.File.ReadAllText(quote.filepath);
-            // De-serialize to object or create new list
-
-            quote.AddJSONValues(jsonData, quote);
-
-            // Update json data string
-            jsonData = JsonConvert.SerializeObject(quote);
-            System.IO.File.WriteAllText(quote.filepath, jsonData);
-            return jsonData;
         }
     }
 }
