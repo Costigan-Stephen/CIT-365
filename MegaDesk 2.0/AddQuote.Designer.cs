@@ -319,6 +319,7 @@
             // 
             this.shippingInput.FormattingEnabled = true;
             this.shippingInput.Items.AddRange(new object[] {
+            "Standard",
             "3 Day",
             "5 Day",
             "7 Day"});

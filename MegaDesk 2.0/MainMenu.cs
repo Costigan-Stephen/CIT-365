@@ -21,8 +21,17 @@ namespace MegaDesk
         {
             AddQuote newquote = new AddQuote();
             newquote.Tag = this;
-            newquote.Show(this);
-            Hide();
+            try
+            {
+                newquote.Show(this);
+                Hide();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The rush order pricing file is missing or corrupted!", "ALERT", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            
+            
         }
 
         private void NavViewQuotes_Click(object sender, EventArgs e)

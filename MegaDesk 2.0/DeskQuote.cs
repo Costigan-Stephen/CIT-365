@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace MegaDesk
 {
-    class DeskQuote
+    public class DeskQuote
     {
         //Values to save
         public Guid id { get; set; }
@@ -30,9 +30,10 @@ namespace MegaDesk
         public double quote { get; set; }
         public string rush { get; set; }
 
-
         public string filepath = "quote.json";
-        private const string QUOTE_SEPARATOR = "#QUOTE#";
+
+        //STORED IN MEGADESK/BIN/DEBUG
+        public string rushOrderPrices = "rushOrderPrices.txt";
 
         public int AreaCalculate(int depth, int width)
         {
@@ -51,24 +52,24 @@ namespace MegaDesk
             return 200;
         }
 
-        public int ShippingCost(string shipping, int area)
+        public int ShippingCost(string shipping, int area, string[,] rushOrder)
         {
             switch (shipping)
             {
                 case "3 Day":
-                    if (area < 1000) return 60;
-                    if (area >= 1000 && area <= 2000) return 70;
-                    if (area > 2000) return 80;
+                    if (area < 1000) return Int32.Parse(rushOrder[0,0]);
+                    if (area >= 1000 && area <= 2000) return Int32.Parse(rushOrder[0,1]);
+                    if (area > 2000) return Int32.Parse(rushOrder[0,2]);
                     return 0;
                 case "5 Day":
-                    if (area < 1000) return 40;
-                    if (area >= 1000 && area <= 2000) return 50;
-                    if (area > 2000) return 60;
+                    if (area < 1000) return Int32.Parse(rushOrder[1,0]);
+                    if (area >= 1000 && area <= 2000) return Int32.Parse(rushOrder[1,1]);
+                    if (area > 2000) return Int32.Parse(rushOrder[1,2]);
                     return 0;
                 case "7 Day":
-                    if (area < 1000) return 30;
-                    if (area >= 1000 && area <= 2000) return 35;
-                    if (area > 2000) return 40;
+                    if (area < 1000) return Int32.Parse(rushOrder[2,0]);
+                    if (area >= 1000 && area <= 2000) return Int32.Parse(rushOrder[2,1]);
+                    if (area > 2000) return Int32.Parse(rushOrder[2,2]);
                     return 0;
                 default:
                     return 0;
