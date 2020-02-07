@@ -443,7 +443,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DisplayQuote";
             this.Text = "DisplayQuote";
-            this.Load += new System.EventHandler(this.DisplayQuote_Load);
             ((System.ComponentModel.ISupportInitialize)(this.drawerInput)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
