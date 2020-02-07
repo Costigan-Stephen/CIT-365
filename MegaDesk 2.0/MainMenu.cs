@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MegaDesk
@@ -32,8 +23,6 @@ namespace MegaDesk
             {
                 MessageBox.Show("The rush order pricing file is missing or corrupted!", "ALERT", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            
-            
         }
 
         private void NavViewQuotes_Click(object sender, EventArgs e)

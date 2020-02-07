@@ -1,14 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 using System.Windows.Forms;
 
 namespace MegaDesk
@@ -65,11 +56,6 @@ namespace MegaDesk
             MainMenu viewMenu = (MainMenu)Tag;
             viewMenu.Show();
             Close();
-        }
-
-        private void DisplayQuote_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
