@@ -25,7 +25,7 @@ namespace MegaDesk
         public string filepath = "quote.json";
 
         //STORED IN MEGADESK/BIN/DEBUG
-        public string rushOrderPrices = "rushOrderPrices.txt";
+        public string rushOrderPrices = "Resources/rushOrderPrices.txt";
 
         public int AreaCalculate(int depth, int width)
         {
