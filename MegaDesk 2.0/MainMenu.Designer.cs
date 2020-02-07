@@ -33,6 +33,7 @@
             this.NavViewQuotes = new System.Windows.Forms.Button();
             this.navSearchQuotes = new System.Windows.Forms.Button();
             this.navExit = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NavAddQuote
@@ -83,6 +84,18 @@
             this.navExit.UseVisualStyleBackColor = false;
             this.navExit.Click += new System.EventHandler(this.navExit_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.button1.Location = new System.Drawing.Point(566, 396);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(222, 42);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "Upload rushOrderPrices.txt";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.uploadButton_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -91,6 +104,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.navExit);
             this.Controls.Add(this.navSearchQuotes);
             this.Controls.Add(this.NavViewQuotes);
@@ -108,6 +122,7 @@
         private System.Windows.Forms.Button NavViewQuotes;
         private System.Windows.Forms.Button navSearchQuotes;
         private System.Windows.Forms.Button navExit;
+        private System.Windows.Forms.Button button1;
     }
 }
 

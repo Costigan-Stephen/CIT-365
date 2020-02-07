@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,10 +65,16 @@ namespace MegaDesk
             Application.Exit();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void uploadButton_Click(object sender, EventArgs e)
         {
-            DeskQuote DeskQuote = new DeskQuote();
-            DeskQuote.OpenFile();
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Text files | *.txt"; // file types, that will be allowed to upload
+            dialog.Multiselect = false; // allow/deny user to upload more than one file at a time
+            if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
+            {
+                String path = dialog.FileName; // get name of file;
+                System.IO.File.Copy(path, "rushOrderPrices.txt", true);
+            }
         }
     }
 }
